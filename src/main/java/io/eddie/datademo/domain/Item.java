@@ -1,10 +1,7 @@
 package io.eddie.datademo.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -24,6 +21,7 @@ public class Item {
     @Column(unique = true, nullable = false)
     private String code;
 
+    @Setter
     private Integer price;
 
     private LocalDateTime createdAt = LocalDateTime.now();

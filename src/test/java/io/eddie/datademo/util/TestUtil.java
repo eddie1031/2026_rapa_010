@@ -2,7 +2,11 @@ package io.eddie.datademo.util;
 
 import io.eddie.datademo.domain.Item;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class TestUtil {
 
@@ -30,4 +34,11 @@ public class TestUtil {
                 .price(genRandomPrice())
                 .build();
     }
+
+    public static List<Item> generateItemList(int amount) {
+        return IntStream.range(0, amount)
+                .mapToObj(_ -> generateItem())
+                .toList();
+    }
+
 }

@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -37,6 +38,18 @@ public class HibernateItemRepository {
         return Optional.ofNullable(
                 entityManager.find(Item.class, id)
         );
+    }
+
+    public void updatePrice(String itemCode, int price) {
+
+        Item findItem = findByCode(itemCode);
+        findItem.setPrice(price);
+
+    }
+
+    public List<Item> findAll() {
+        return entityManager.createQuery("select i from Item i", Item.class)
+                .getResultList();
     }
 
 
