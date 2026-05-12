@@ -2,6 +2,7 @@ package io.eddie.datademo.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,6 +28,7 @@ public class Item {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder
     public Item(String name, String code, Integer price) {
         this.name = name;
         this.code = code;
