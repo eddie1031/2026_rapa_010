@@ -10,6 +10,7 @@ import java.util.Objects;
 
 @Getter
 @Entity
+@Table(name = "items")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Item {
 
