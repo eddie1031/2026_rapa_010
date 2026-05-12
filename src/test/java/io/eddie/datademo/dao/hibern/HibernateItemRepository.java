@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @Transactional
 @RequiredArgsConstructor
@@ -21,15 +23,22 @@ public class HibernateItemRepository {
     // code
     public Item findByCode(String code) {
 
-//        entityManager.find(Item.class, id);
-
-        Item findItem = entityManager.createQuery("select i from Item i where i.code = :code", Item.class)
-                .setParameter("code", code)
-                .getSingleResult();
-
-        return findItem;
+        try {
+            return entityManager.createQuery("select i from Item i where i.code = :code", Item.class)
+                    .setParameter("code", code)
+                    .getSingleResult();
+        } catch ( Exception e ) {
+            return null;
+        }
 
     }
+
+    public Optional<Item> findById(Long id) {
+        return Optional.ofNullable(
+                entityManager.find(Item.class, id)
+        );
+    }
+
 
 
 }
