@@ -57,7 +57,29 @@ class DataJpaItemRepositoryTests {
     @Test
     void it_will_update() {
 
+        Integer targetPrice = 30_000;
 
+        Long targetId = item.getId();
+
+        Optional<Item> itemOptional = repository.findById(targetId);
+        assertThat(itemOptional.isPresent()).isTrue();
+
+        Item item = itemOptional.get();
+        item.setPrice(targetPrice);
+
+        Item updatedItem = repository.findById(targetId).get();
+        assertThat(updatedItem.getPrice()).isEqualTo(targetPrice);
+
+
+    }
+
+    @Test
+    void it_will_delete() {
+
+        repository.delete(item);
+
+        Optional<Item> itemOptional = repository.findById(item.getId());
+        assertThat(itemOptional.isPresent()).isFalse();
 
     }
 

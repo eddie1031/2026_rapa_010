@@ -2,6 +2,7 @@ package io.eddie.datademo.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +29,7 @@ public class Order {
 
     private LocalDateTime orderedAt = LocalDateTime.now();
 
+    @Builder
     public Order(String code, List<OrderItems> items) {
         this.code = code;
         if ( items != null ) {
