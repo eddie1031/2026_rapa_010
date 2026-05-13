@@ -1,8 +1,7 @@
 package io.eddie.datademo.dao.hibern;
 
 import io.eddie.datademo.domain.Item;
-import io.eddie.datademo.util.TestUtil;
-import org.assertj.core.api.Assertions;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import static io.eddie.datademo.util.TestUtil.generateItem;
 import static io.eddie.datademo.util.TestUtil.generateItemList;
 import static org.assertj.core.api.Assertions.*;
 
+@Slf4j
 @SpringBootTest
 class HibernateItemRepositoryTests {
 
@@ -139,8 +139,23 @@ class HibernateItemRepositoryTests {
 
         assertThat(findItems.size()).isGreaterThan(SIZE);
 
+    }
 
+    @Test
+    void it_will_save_all() {
+
+        int SIZE = 1000;
+        List<Item> items = generateItemList(SIZE);
+
+        List<Item> savedList = repository.saveAll(items);
+
+        assertThat(savedList.size()).isEqualTo(SIZE);
+
+        savedList.forEach(
+                item -> assertThat(item.getId()).isNotNull()
+        );
 
     }
+
 
 }

@@ -13,8 +13,8 @@ public class TestUtil {
     private static final String ITEM_PREFIX = "ITEM_";
 
     public static String genRandomItemCode() {
-//        return ITEM_PREFIX + UUID.randomUUID().toString().replaceAll("-", "");
-        return ITEM_PREFIX + genNumStr();
+        return ITEM_PREFIX + UUID.randomUUID().toString().replaceAll("-", "");
+//        return ITEM_PREFIX + genNumStr();
     }
 
     public static String genNumStr() {

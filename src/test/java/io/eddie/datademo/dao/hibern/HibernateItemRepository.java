@@ -4,11 +4,14 @@ import io.eddie.datademo.domain.Item;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
+@Slf4j
 @Repository
 @Transactional
 @RequiredArgsConstructor
@@ -50,6 +53,31 @@ public class HibernateItemRepository {
     public List<Item> findAll() {
         return entityManager.createQuery("select i from Item i", Item.class)
                 .getResultList();
+    }
+
+
+    public List<Item> saveAll(List<Item> items) {
+
+        final int BATCH_SIZE = 50;
+
+        for ( int i = 0; i < items.size(); i++ ) {
+
+            entityManager.persist(items.get(i));
+
+            if ( i % BATCH_SIZE == 0 && i > 0 ) {
+                entityManager.flush();
+                entityManager.clear();
+                log.info("FLUSH!");
+            }
+
+        }
+
+        entityManager.flush();
+        entityManager.clear();
+        log.info("FLUSH!");
+
+        return items;
+
     }
 
 
