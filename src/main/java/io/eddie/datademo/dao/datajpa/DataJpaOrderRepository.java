@@ -13,6 +13,8 @@ public interface DataJpaOrderRepository extends JpaRepository<Order, Long> {
 
     Optional<Order> findByCode(String code);
 
+//    void deleteByCode(String code);
+
 }
 
 

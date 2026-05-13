@@ -15,6 +15,15 @@ spring:
       hibernate:
         format_sql: true
 
+mybatis:
+
+  type-aliases-package: io.eddie.datademo.domain
+
+  configuration:
+    map-underscore-to-camel-case: true
+
+  mapper-locations: classpath:mappers/*.xml
+
 #
 #logging:
 #  level:

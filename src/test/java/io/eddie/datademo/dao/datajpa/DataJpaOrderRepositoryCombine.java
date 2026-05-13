@@ -2,16 +2,16 @@ package io.eddie.datademo.dao.datajpa;
 
 import io.eddie.datademo.domain.Order;
 import io.eddie.datademo.domain.OrderItems;
-//import jakarta.transaction.Transactional;
+import io.eddie.datademo.orders.exceptions.CouldNotFindSuchOrderException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class DataJpaOrderRepositoryCombine implements OrderRepository {
 
     private final DataJpaOrderRepository orderRepository;
@@ -25,17 +25,23 @@ public class DataJpaOrderRepositoryCombine implements OrderRepository {
 
     @Override
     public Optional<Order> findOrderByOrderCode(String orderCode) {
-        return Optional.empty();
+        return orderRepository.findByOrderCode(orderCode);
     }
 
     @Override
     public String removeOrderByOrderCode(String orderCode) {
-        return "";
+
+        Order findOrder = orderRepository.findByCode(orderCode)
+                .orElseThrow(CouldNotFindSuchOrderException::new);
+
+        orderRepository.delete(findOrder);
+
+        return orderCode;
     }
 
     @Override
     public OrderItems saveOrderItems(OrderItems orderItems) {
-        return null;
+        return orderItemRepository.save(orderItems);
     }
 
 }
