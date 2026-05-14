@@ -9,11 +9,11 @@ import java.util.List;
 public interface DataJpaOrderItemRepository extends JpaRepository<OrderItems, Long> {
 
     @Query("""
-    select 
-        oi 
-    from 
-        OrderItems oi 
-    where 
+    select
+        oi
+    from
+        OrderItems oi
+    where
         oi.order.code = :orderCode
     """)
     List<OrderItems> findAllByOrderCode(String orderCode);
