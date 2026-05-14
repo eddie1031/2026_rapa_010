@@ -4,11 +4,12 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OrderItems {
+public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +18,7 @@ public class OrderItems {
     @Column(unique = true, nullable = false)
     private String code;
 
+    @Setter
     private Integer quantity;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -27,12 +29,12 @@ public class OrderItems {
     @JoinColumn(name = "item_code", referencedColumnName = "code")
     private Item item;
 
-    public OrderItems(String code, Integer quantity) {
+    public OrderItem(String code, Integer quantity) {
         this.code = code;
         this.quantity = quantity;
     }
 
-    public OrderItems setOrder(Order order) {
+    public OrderItem setOrder(Order order) {
 
         this.order = order;
         order.getOrderItems().add(this);

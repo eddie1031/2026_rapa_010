@@ -1,13 +1,12 @@
 package io.eddie.datademo.dao.datajpa;
 
 import io.eddie.datademo.domain.Order;
-import io.eddie.datademo.domain.OrderItems;
+import io.eddie.datademo.domain.OrderItem;
 import io.eddie.datademo.orders.exceptions.CouldNotFindSuchOrderException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Repository
@@ -40,8 +39,8 @@ public class DataJpaOrderRepositoryCombine implements OrderRepository {
     }
 
     @Override
-    public OrderItems saveOrderItems(OrderItems orderItems) {
-        return orderItemRepository.save(orderItems);
+    public OrderItem saveOrderItems(OrderItem orderItem) {
+        return orderItemRepository.save(orderItem);
     }
 
 }

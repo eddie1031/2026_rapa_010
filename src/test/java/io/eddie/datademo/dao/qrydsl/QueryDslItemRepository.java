@@ -34,4 +34,11 @@ public class QueryDslItemRepository {
                 .fetchFirst());
     }
 
+    public Optional<Item> findByCode(String code) {
+        return Optional.ofNullable(queryFactory.selectFrom(item)
+                .where(item.code.eq(code))
+                .fetchFirst());
+    }
+
+
 }

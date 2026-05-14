@@ -1,21 +1,21 @@
 package io.eddie.datademo.dao.datajpa;
 
-import io.eddie.datademo.domain.OrderItems;
+import io.eddie.datademo.domain.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface DataJpaOrderItemRepository extends JpaRepository<OrderItems, Long> {
+public interface DataJpaOrderItemRepository extends JpaRepository<OrderItem, Long> {
 
     @Query("""
     select
         oi
     from
-        OrderItems oi
+        OrderItem oi
     where
         oi.order.code = :orderCode
     """)
-    List<OrderItems> findAllByOrderCode(String orderCode);
+    List<OrderItem> findAllByOrderCode(String orderCode);
 
 }

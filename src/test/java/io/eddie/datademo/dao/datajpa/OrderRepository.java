@@ -1,7 +1,7 @@
 package io.eddie.datademo.dao.datajpa;
 
 import io.eddie.datademo.domain.Order;
-import io.eddie.datademo.domain.OrderItems;
+import io.eddie.datademo.domain.OrderItem;
 
 import java.util.Optional;
 
@@ -11,6 +11,6 @@ public interface OrderRepository {
     Optional<Order> findOrderByOrderCode(String orderCode);
     String removeOrderByOrderCode(String orderCode);
 
-    OrderItems saveOrderItems(OrderItems orderItems);
+    OrderItem saveOrderItems(OrderItem orderItem);
 
 }

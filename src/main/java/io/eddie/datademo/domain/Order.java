@@ -25,12 +25,12 @@ public class Order {
     private String code;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderItems> orderItems = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime orderedAt = LocalDateTime.now();
 
     @Builder
-    public Order(String code, List<OrderItems> items) {
+    public Order(String code, List<OrderItem> items) {
         this.code = code;
         if ( items != null ) {
             this.orderItems.addAll(items);
